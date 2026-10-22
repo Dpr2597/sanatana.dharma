@@ -1,0 +1,1505 @@
+<!<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanātana Dharma: Scriptures, Stories & Wisdom Portal</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            saffron: {
+              50: '#fffaf0',
+              100: '#feefc3',
+              200: '#fed7aa',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+              800: '#9a3412',
+            },
+            vedicGold: '#d4af37',
+            deepMaroon: '#4a0e17',
+            cosmicNavy: '#0b1120',
+            cardBg: '#131b2e'
+          },
+          fontFamily: {
+            serif: ['Cinzel', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+            sanskrit: ['Tiro Devanagari Sanskrit', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0b1120;
+      color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+    }
+    .sanskrit-text {
+      font-family: 'Tiro Devanagari Sanskrit', serif;
+    }
+    .cinzel-title {
+      font-family: 'Cinzel', serif;
+    }
+    .gold-gradient {
+      background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 50%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-border {
+      border-color: rgba(212, 175, 55, 0.3);
+    }
+    .gold-border:hover {
+      border-color: rgba(212, 175, 55, 0.8);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c2410c;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-orange-500 selection:text-white">
+
+  <!-- TOP HEADER -->
+  <header class="sticky top-0 z-50 bg-[#0b1120]/95 backdrop-blur-md border-b border-amber-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo & Branding -->
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('overview')">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center shadow-lg shadow-amber-500/20 text-white font-bold text-2xl sanskrit-text">
+            ॐ
+          </div>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold tracking-wide cinzel-title text-amber-200">
+              Sanātana Dharma
+            </h1>
+            <p class="text-xs text-amber-400/80 font-medium tracking-wider">VEDAS • UPANISHADS • PURANAS • ITIHASAS</p>
+          </div>
+        </div>
+
+        <!-- Ambient Sound & Search Button -->
+        <div class="flex items-center space-x-3">
+          <!-- Audio Drone Synthesizer Button -->
+          <button id="audioToggleBtn" onclick="toggleOmDrone()" class="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-amber-950/60 hover:bg-amber-900/60 border border-amber-500/30 text-amber-300 text-xs transition-all">
+            <span id="audioIcon">📿</span>
+            <span id="audioText">Meditative Om</span>
+          </button>
+
+          <!-- Bookmarks Count -->
+          <button onclick="switchTab('bookmarks')" class="p-2 rounded-full bg-slate-800 hover:bg-slate-700 text-amber-400 relative border border-amber-500/20" title="Saved Bookmarks">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+            <span id="bookmarkCount" class="absolute -top-1 -right-1 bg-orange-600 text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- MAIN NAVIGATION TABS -->
+      <nav class="flex space-x-1 sm:space-x-2 overflow-x-auto pb-3 custom-scrollbar text-sm font-medium">
+        <button onclick="switchTab('overview')" class="nav-tab px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-colors bg-amber-600 text-white font-semibold" data-tab="overview">🏛️ Overview & Pillars</button>
+        <button onclick="switchTab('queries')" class="nav-tab px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:bg-slate-800 text-slate-300" data-tab="queries">🔍 Queries & Doubts</button>
+        <button onclick="switchTab('vedas')" class="nav-tab px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:bg-slate-800 text-slate-300" data-tab="vedas">📜 The 4 Vedas</button>
+        <button onclick="switchTab('upanishads')" class="nav-tab px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:bg-slate-800 text-slate-300" data-tab="upanishads">🧘 Upanishads</button>
+        <button onclick="switchTab('puranas')" class="nav-tab px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:bg-slate-800 text-slate-300" data-tab="puranas">🪔 18 Maha Puranas</button>
+        <button onclick="switchTab('itihasas')" class="nav-tab px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:bg-slate-800 text-slate-300" data-tab="itihasas">⚔️ Itihasas & Gita</button>
+        <button onclick="switchTab('stories')" class="nav-tab px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:bg-slate-800 text-slate-300" data-tab="stories">📖 Sacred Stories</button>
+        <button onclick="switchTab('history')" class="nav-tab px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:bg-slate-800 text-slate-300" data-tab="history">⏳ History & Sages</button>
+        <button onclick="switchTab('quiz')" class="nav-tab px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:bg-slate-800 text-slate-300" data-tab="quiz">✨ Dharma Quiz</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO BANNER -->
+  <div class="relative bg-gradient-to-b from-[#131b2e] to-[#0b1120] border-b border-amber-900/30 overflow-hidden">
+    <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-3 text-center md:text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
+            <span>सत्यमेव जयते नानृतम्</span> • Truth Alone Triumphs
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold cinzel-title text-amber-100 tracking-wide">
+            The Eternal Wisdom of Sanātana Dharma
+          </h2>
+          <p class="text-slate-300 max-w-2xl text-sm sm:text-base leading-relaxed">
+            An encyclopedic interactive sanctuary for exploring the primordial revelations of the Śruti (Vedas & Upanishads), the cosmic teachings of the Smṛti (Puranas), the epic moral tapestries of the Itihāsas, and answers to modern philosophical queries.
+          </p>
+        </div>
+
+        <!-- Daily Shloka Widget -->
+        <div class="w-full md:w-96 bg-slate-900/80 backdrop-blur border border-amber-500/30 rounded-2xl p-5 shadow-xl relative">
+          <div class="flex justify-between items-center text-xs text-amber-400 font-semibold mb-2">
+            <span>✨ ŚLOKA OF CONTEMPLATION</span>
+            <span class="text-slate-400">Bṛhadāraṇyaka 1.3.28</span>
+          </div>
+          <p class="sanskrit-text text-base sm:text-lg text-amber-200 leading-snug font-medium">
+            असतो मा सद्गमय ।<br>
+            तमसो मा ज्योतिर्गमय ।<br>
+            मृत्य push-notification ोर्मा अमृतं गमय ॥
+          </p>
+          <p class="text-xs text-slate-300 mt-2 italic">
+            "Lead us from the unreal to the real, from darkness to light, from mortality to immortality."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH & FILTER BAR -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full">
+    <div class="relative">
+      <input type="text" id="globalSearchInput" oninput="handleSearch(this.value)" placeholder="Search scriptures, queries, stories, Upanishads, characters, or Sanskrit terms (e.g., 'Nachiketa', 'Gayatri', 'Karma', 'Bhagavata')..." class="w-full bg-slate-900/90 border border-amber-500/30 rounded-xl px-11 py-3 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all shadow-inner">
+      <svg class="w-5 h-5 text-amber-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3.5 top-3.5 text-slate-400 hover:text-slate-200 text-sm">✕ Clear</button>
+    </div>
+    <!-- Search Results Box (Appears when searching) -->
+    <div id="searchResultsContainer" class="hidden mt-4 p-4 bg-slate-900 border border-amber-500/40 rounded-xl shadow-2xl space-y-3">
+      <div class="flex justify-between items-center text-xs font-semibold text-amber-400 border-b border-slate-800 pb-2">
+        <span id="searchResultsCount">0 Results Found</span>
+        <span>Click to view details</span>
+      </div>
+      <div id="searchResultsList" class="max-h-96 overflow-y-auto space-y-2 custom-scrollbar"></div>
+    </div>
+  </div>
+
+  <!-- MAIN TAB CONTENT CONTAINER -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+    <!-- 1. OVERVIEW & PILLARS TAB -->
+    <section id="tab-overview" class="tab-panel space-y-10">
+      
+      <!-- Intro Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-slate-900/70 border border-amber-500/20 rounded-2xl p-6 hover:border-amber-500/50 transition-all">
+          <div class="text-3xl mb-3">📜</div>
+          <h3 class="text-xl font-bold text-amber-200 cinzel-title mb-2">Śruti vs. Smṛti</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            <strong>Śruti</strong> ("that which is heard") represents primordial, eternal cosmic revelations cognized by ancient Ṛṣis in deep dhyāna (The Vedas & Upanishads). <strong>Smṛti</strong> ("that which is remembered") comprises traditions, epics, and civic guidelines adapted for each era (Itihāsas, Purāṇas, and Dharmaśāstras).
+          </p>
+        </div>
+
+        <div class="bg-slate-900/70 border border-amber-500/20 rounded-2xl p-6 hover:border-amber-500/50 transition-all">
+          <div class="text-3xl mb-3">⚖️</div>
+          <h3 class="text-xl font-bold text-amber-200 cinzel-title mb-2">The Four Puruṣārthas</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            The balanced aims of human existence: <strong>Dharma</strong> (righteous duty and cosmic harmony), <strong>Artha</strong> (ethical material wealth and security), <strong>Kāma</strong> (aesthetic and sensory fulfillment in accord with dharma), and <strong>Mokṣa</strong> (spiritual liberation from cyclical existence).
+          </p>
+        </div>
+
+        <div class="bg-slate-900/70 border border-amber-500/20 rounded-2xl p-6 hover:border-amber-500/50 transition-all">
+          <div class="text-3xl mb-3">🌀</div>
+          <h3 class="text-xl font-bold text-amber-200 cinzel-title mb-2">Karma & Saṁsāra</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            The infallible cosmic law of cause and effect: every volition generates impressions (<em>saṁskāras</em>). Reincarnation (<em>saṁsāra</em>) is the educational journey of the individual self (<em>Jīva</em>) evolving until it realizes its non-dual identity with supreme Consciousness (<em>Brahman</em>).
+          </p>
+        </div>
+      </div>
+
+      <!-- The Six Darshanas (Orthodox Philosophical Systems) -->
+      <div class="bg-slate-900/80 border border-amber-500/30 rounded-2xl p-6 sm:p-8">
+        <div class="text-center max-w-2xl mx-auto mb-8">
+          <span class="text-xs uppercase tracking-widest text-amber-400 font-bold">षड्दर्शनानि</span>
+          <h3 class="text-2xl sm:text-3xl font-bold text-amber-100 cinzel-title mt-1">The 6 Orthodox Systems of Philosophy</h3>
+          <p class="text-xs sm:text-sm text-slate-400 mt-2">All six Darśanas accept the authority of the Vedas while examining reality through distinct epistemological lenses.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-5 hover:border-amber-500/40 transition">
+            <h4 class="font-bold text-amber-300 text-lg">1. Nyāya (न्याय)</h4>
+            <p class="text-xs text-amber-500/80 font-medium">Sage Gautama • Epistemology & Logic</p>
+            <p class="text-xs text-slate-300 mt-2">Establishes rigorous rules of reasoning and four valid sources of knowledge (<em>Pramāṇas</em>): Perception (Pratyakṣa), Inference (Anumāna), Comparison (Upamāna), and Testimony (Śabda).</p>
+          </div>
+
+          <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-5 hover:border-amber-500/40 transition">
+            <h4 class="font-bold text-amber-300 text-lg">2. Vaiśeṣika (वैशेषिक)</h4>
+            <p class="text-xs text-amber-500/80 font-medium">Sage Kaṇāda • Atomic Metaphysics</p>
+            <p class="text-xs text-slate-300 mt-2">Analyzes the physical universe into atoms (<em>Paramāṇu</em>) and categorizes all existing things into distinct ontological categories (<em>Padārthas</em>).</p>
+          </div>
+
+          <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-5 hover:border-amber-500/40 transition">
+            <h4 class="font-bold text-amber-300 text-lg">3. Sāṁkhya (सांख्य)</h4>
+            <p class="text-xs text-amber-500/80 font-medium">Sage Kapila • Dualistic Enumeration</p>
+            <p class="text-xs text-slate-300 mt-2">Delineates reality between unattached pure Consciousness (<em>Puruṣa</em>) and the evolving material creative matrix (<em>Prakṛti</em>) governed by the 3 Guṇas.</p>
+          </div>
+
+          <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-5 hover:border-amber-500/40 transition">
+            <h4 class="font-bold text-amber-300 text-lg">4. Yoga (योग)</h4>
+            <p class="text-xs text-amber-500/80 font-medium">Sage Patañjali • Practical Self-Realization</p>
+            <p class="text-xs text-slate-300 mt-2">The practical discipline of calming the modifications of the mind (<em>Citta-vṛtti-nirodha</em>) via the 8 Limbs (<em>Aṣṭāṅga Yoga</em>) culminating in Samādhi.</p>
+          </div>
+
+          <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-5 hover:border-amber-500/40 transition">
+            <h4 class="font-bold text-amber-300 text-lg">5. Mīmāṁsā (मीमांसा)</h4>
+            <p class="text-xs text-amber-500/80 font-medium">Sage Jaimini • Ritual Inquiry & Hermeneutics</p>
+            <p class="text-xs text-slate-300 mt-2">Examines the early portions of the Vedas (Karmakāṇḍa), the efficacy of sacred sound, and the duty of preserving cosmic order through conscious action.</p>
+          </div>
+
+          <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-5 hover:border-amber-500/40 transition">
+            <h4 class="font-bold text-amber-300 text-lg">6. Vedānta (वेदान्त)</h4>
+            <p class="text-xs text-amber-500/80 font-medium">Sage Bādarāyaṇa • The Culmination</p>
+            <p class="text-xs text-slate-300 mt-2">Inquiry into the ultimate nature of the Self and Brahman as revealed in the Upanishads. Branching into Advaita (Non-dualism), Viśiṣṭādvaita, and Dvaita.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. QUERIES & DOUBT RESOLVER TAB -->
+    <section id="tab-queries" class="tab-panel hidden space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h3 class="text-2xl font-bold cinzel-title text-amber-200">Clarifying Queries & Common Doubts</h3>
+          <p class="text-xs sm:text-sm text-slate-400">Authentic scriptural resolutions to key questions regarding Sanātana Dharma.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <button onclick="filterQueries('all')" class="query-filter-btn px-3 py-1 rounded-full bg-amber-600 text-white font-medium" data-cat="all">All</button>
+          <button onclick="filterQueries('theology')" class="query-filter-btn px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="theology">Theology & God</button>
+          <button onclick="filterQueries('practices')" class="query-filter-btn px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="practices">Worship & Practices</button>
+          <button onclick="filterQueries('philosophy')" class="query-filter-btn px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="philosophy">Philosophy & Karma</button>
+          <button onclick="filterQueries('society')" class="query-filter-btn px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="society">Society & Varna</button>
+        </div>
+      </div>
+
+      <!-- Queries Accordion List -->
+      <div id="queriesListContainer" class="space-y-4"></div>
+    </section>
+
+    <!-- 3. THE 4 VEDAS TAB -->
+    <section id="tab-vedas" class="tab-panel hidden space-y-8">
+      <div>
+        <h3 class="text-2xl font-bold cinzel-title text-amber-200">The Four Primordial Vedas (चतुर्वेदाः)</h3>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">
+          Regarded as <em>Apauruṣeya</em> (authorless, of divine origin), the Vedas are the foundational roots of Sanātana Dharma.
+        </p>
+      </div>
+
+      <!-- Veda Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Rigveda -->
+        <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-6 hover:border-amber-400 transition-all">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 text-xs font-semibold">10,552 Mantras • 10 Mandalas</span>
+            <span class="text-xs text-slate-400">Upaveda: Āyurveda</span>
+          </div>
+          <h4 class="text-2xl font-bold text-amber-100 cinzel-title mt-3">1. Rigveda (ऋग्वेद)</h4>
+          <p class="text-xs text-amber-400 font-medium">The Veda of Sacred Hymns of Praise</p>
+          <p class="text-sm text-slate-300 mt-3 leading-relaxed">
+            The oldest surviving text of humanity. Contains profound hymns to deities symbolizing cosmic and internal forces (Agni, Indra, Varuṇa, Sūrya, Uṣas). Includes the famous <strong>Gāyatrī Mantra</strong> (3.62.10) and the sublime <strong>Nāsadīya Sūkta</strong> (Creation Hymn, 10.129).
+          </p>
+          <div class="mt-4 p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs">
+            <span class="font-bold text-amber-400">Mahāvākya:</span> <span class="sanskrit-text text-amber-200 text-sm">प्रज्ञानं ब्रह्म</span> (<em>Prajñānaṁ Brahma</em> — "Consciousness is Brahman" — Aitareya Upaniṣad).
+          </div>
+        </div>
+
+        <!-- Samaveda -->
+        <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-6 hover:border-amber-400 transition-all">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 text-xs font-semibold">1,875 Verses • Melodic Chants</span>
+            <span class="text-xs text-slate-400">Upaveda: Gāndharvaveda</span>
+          </div>
+          <h4 class="text-2xl font-bold text-amber-100 cinzel-title mt-3">2. Samaveda (सामवेद)</h4>
+          <p class="text-xs text-amber-400 font-medium">The Veda of Melodies and Sacred Chants</p>
+          <p class="text-sm text-slate-300 mt-3 leading-relaxed">
+            The foundation of Indian classical music. In the Bhagavad Gītā (10.22), Lord Krishna declares: <em>"Among the Vedas, I am the Sāmaveda."</em> Its verses are set to precise musical notation (Sāmagāna) designed to awaken devotional ecstasies and harmonize neural vibrations.
+          </p>
+          <div class="mt-4 p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs">
+            <span class="font-bold text-amber-400">Mahāvākya:</span> <span class="sanskrit-text text-amber-200 text-sm">तत्त्वमसि</span> (<em>Tat Tvam Asi</em> — "That Thou Art" — Chāndogya Upaniṣad).
+          </div>
+        </div>
+
+        <!-- Yajurveda -->
+        <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-6 hover:border-amber-400 transition-all">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 text-xs font-semibold">Śukla & Kṛṣṇa Recensions</span>
+            <span class="text-xs text-slate-400">Upaveda: Dhanurveda</span>
+          </div>
+          <h4 class="text-2xl font-bold text-amber-100 cinzel-title mt-3">3. Yajurveda (यजुर्वेद)</h4>
+          <p class="text-xs text-amber-400 font-medium">The Veda of Liturgical Action & Yajña</p>
+          <p class="text-sm text-slate-300 mt-3 leading-relaxed">
+            Provides the precise formulas, sacred prose, and philosophical justifications for rituals and civic obligations. Divided into <strong>Śukla (White)</strong> Yajurveda (clear mantras revealed to Sage Yājñavalkya) and <strong>Kṛṣṇa (Black)</strong> Yajurveda (mantras interwoven with commentaries). Contains the celebrated <em>Śrī Rudram</em>.
+          </p>
+          <div class="mt-4 p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs">
+            <span class="font-bold text-amber-400">Mahāvākya:</span> <span class="sanskrit-text text-amber-200 text-sm">अहं ब्रह्मास्मि</span> (<em>Ahaṁ Brahmāsmi</em> — "I am Brahman" — Bṛhadāraṇyaka Upaniṣad).
+          </div>
+        </div>
+
+        <!-- Atharvaveda -->
+        <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-6 hover:border-amber-400 transition-all">
+          <div class="flex justify-between items-start">
+            <span class="px-2.5 py-1 rounded-md bg-amber-500/20 text-amber-300 text-xs font-semibold">730 Hymns • 20 Kāṇḍas</span>
+            <span class="text-xs text-slate-400">Upaveda: Sthāpatyaveda</span>
+          </div>
+          <h4 class="text-2xl font-bold text-amber-100 cinzel-title mt-3">4. Atharvaveda (अथर्ववेद)</h4>
+          <p class="text-xs text-amber-400 font-medium">The Veda of Daily Living, Healing & Statecraft</p>
+          <p class="text-sm text-slate-300 mt-3 leading-relaxed">
+            Attributed to sages Atharvan and Aṅgiras. Blends practical living, herbal medicine, sociological harmony, environmental reverence (the famous <em>Pṛthvī Sūkta</em> — Hymn to Mother Earth), and deeply esoteric spiritual revelations.
+          </p>
+          <div class="mt-4 p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs">
+            <span class="font-bold text-amber-400">Mahāvākya:</span> <span class="sanskrit-text text-amber-200 text-sm">अयमात्मा ब्रह्म</span> (<em>Ayam Ātmā Brahma</em> — "This Self is Brahman" — Māṇḍūkya Upaniṣad).
+          </div>
+        </div>
+
+      </div>
+
+      <!-- The Four Layers of Vedic Literature -->
+      <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 mt-6">
+        <h4 class="text-lg font-bold text-amber-300 mb-4 cinzel-title">The 4 Sequential Layers of Each Veda</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+          <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
+            <span class="font-bold text-amber-400 block text-sm">1. Saṁhitā (संहिता)</span>
+            <p class="text-slate-300 mt-1">Poetic hymns, chants, and core sonic mantras sung during rituals.</p>
+          </div>
+          <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
+            <span class="font-bold text-amber-400 block text-sm">2. Brāhmaṇa (ब्राह्मण)</span>
+            <p class="text-slate-300 mt-1">Prose commentaries detailing the esoteric symbolism and execution of duties.</p>
+          </div>
+          <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
+            <span class="font-bold text-amber-400 block text-sm">3. Āraṇyaka (आरण्यक)</span>
+            <p class="text-slate-300 mt-1">"Forest texts" written for hermits focusing on internal meditative sacrifice.</p>
+          </div>
+          <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
+            <span class="font-bold text-amber-400 block text-sm">4. Upaniṣad (उपनिषद्)</span>
+            <p class="text-slate-300 mt-1">The philosophical climax (Vedānta) revealing the oneness of Ātman and Brahman.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. UPANISHADS TAB -->
+    <section id="tab-upanishads" class="tab-panel hidden space-y-6">
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="text-2xl font-bold cinzel-title text-amber-200">The Mukhya Upaniṣads (प्रमुख उपनिषदः)</h3>
+          <p class="text-xs sm:text-sm text-slate-400">The 10-12 principal philosophical summits commented upon by Ādi Śaṅkara.</p>
+        </div>
+      </div>
+
+      <!-- Upanishads Grid -->
+      <div id="upanishadsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- 5. 18 MAHA PURANAS TAB -->
+    <section id="tab-puranas" class="tab-panel hidden space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h3 class="text-2xl font-bold cinzel-title text-amber-200">The 18 Mahā Purāṇas (अष्टादश महापुराणानि)</h3>
+          <p class="text-xs sm:text-sm text-slate-400">The grand encyclopedic storehouse of cosmic history, genealogies, and dharma.</p>
+        </div>
+        <div class="flex gap-2 text-xs">
+          <button onclick="filterPuranas('all')" class="purana-filter-btn px-3 py-1 rounded-full bg-amber-600 text-white font-medium" data-cat="all">All (18)</button>
+          <button onclick="filterPuranas('vaishnava')" class="purana-filter-btn px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="vaishnava">Vaiṣṇava (6)</button>
+          <button onclick="filterPuranas('shaiva')" class="purana-filter-btn px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="shaiva">Śaiva (6)</button>
+          <button onclick="filterPuranas('brahma')" class="purana-filter-btn px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700" data-cat="brahma">Brahma/Śākta (6)</button>
+        </div>
+      </div>
+
+      <div id="puranasGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- 6. ITIHASAS & GITA TAB -->
+    <section id="tab-itihasas" class="tab-panel hidden space-y-8">
+      <div>
+        <h3 class="text-2xl font-bold cinzel-title text-amber-200">The Itihāsas: Ramayana & Mahabharata</h3>
+        <p class="text-xs sm:text-sm text-slate-400">"Itihāsa" literally means <em>'Thus verily it occurred'</em> — epic living demonstrations of Dharma in human life.</p>
+      </div>
+
+      <!-- Ramayana Sub-section -->
+      <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-6 sm:p-8">
+        <div class="flex items-center space-x-3 mb-4">
+          <span class="text-3xl">🏹</span>
+          <div>
+            <h4 class="text-2xl font-bold text-amber-100 cinzel-title">Vālmīki Rāmāyaṇa</h4>
+            <p class="text-xs text-amber-400 font-semibold">24,000 Verses • 7 Kāṇḍas • Composed by Ādikavi Vālmīki</p>
+          </div>
+        </div>
+        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+          The epic journey of Sri Rama, the exemplar of righteousness (<em>Maryādā Puruṣottama</em>), demonstrating how adherence to truth and duty transcends personal convenience in every relationship—as a son, brother, husband, king, and friend.
+        </p>
+
+        <!-- 7 Kandas Grid -->
+        <h5 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3">The 7 Kandas (Books)</h5>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 block">1. Bāla Kāṇḍa</span>
+            <p class="text-slate-400 mt-1">Birth of Sri Rama, training with Vishvamitra, slaying of Tataka, breaking Shiva's bow, marriage to Sita.</p>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 block">2. Ayodhyā Kāṇḍa</span>
+            <p class="text-slate-400 mt-1">Kaikeyi's boons, Dasharatha's heartbreak, Rama's noble acceptance of 14 years exile, Bharata's padukas.</p>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 block">3. Āraṇya Kāṇḍa</span>
+            <p class="text-slate-400 mt-1">Forest hermitage life, Surpanakha incident, golden deer deception, Sita's abduction, Jatayu's sacrifice.</p>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 block">4. Kiṣkindhā Kāṇḍa</span>
+            <p class="text-slate-400 mt-1">Alliance with Sugriva, meeting Hanuman, the slaying of Vali, mobilization of the Vanara search armies.</p>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 block">5. Sundara Kāṇḍa</span>
+            <p class="text-slate-400 mt-1">Hanuman's heroic leap across the ocean, locating Sita in Ashoka Vatika, burning of Lanka, message of hope.</p>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 block">6. Yuddha Kāṇḍa</span>
+            <p class="text-slate-400 mt-1">Building Rama Setu, epic war with Ravana, Vibhishana's surrender, victory of Dharma, return to Ayodhya.</p>
+          </div>
+          <div class="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 block">7. Uttara Kāṇḍa</span>
+            <p class="text-slate-400 mt-1">Rama Rajya, the rule of ideal justice, the birth and valour of Lava and Kusha, Sita's sacred reunion with Earth.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mahabharata & Bhagavad Gita -->
+      <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-6 sm:p-8">
+        <div class="flex items-center space-x-3 mb-4">
+          <span class="text-3xl">⚔️</span>
+          <div>
+            <h4 class="text-2xl font-bold text-amber-100 cinzel-title">Mahābhārata & Śrīmad Bhagavad Gītā</h4>
+            <p class="text-xs text-amber-400 font-semibold">100,000+ Verses • 18 Parvas • Authored by Maharṣi Vedavyāsa</p>
+          </div>
+        </div>
+        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+          The grandest epic in human history, examining every subtle facet of human psychology, statecraft, ethics, and destiny. Embedded within the Bhīṣma Parva is the <strong>Bhagavad Gītā</strong>: Lord Krishna's 700-verse discourse to Arjuna on the battlefield of Kurukṣetra.
+        </p>
+
+        <!-- The 4 Yogas of the Gita -->
+        <h5 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3">The Four Primary Paths of Liberation (Yogas)</h5>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 text-sm block">Karma Yoga</span>
+            <p class="text-slate-300 mt-2">Selfless action performed as worship without selfish attachment to fruits (<em>Karmanyevādhikāraste mā phaleṣu kadācana</em>).</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 text-sm block">Bhakti Yoga</span>
+            <p class="text-slate-300 mt-2">Loving surrender of ego and emotions to the Divine (<em>Patraṁ puṣpaṁ phalaṁ toyaṁ yo me bhaktyā prayacchati</em>).</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 text-sm block">Jñāna Yoga</span>
+            <p class="text-slate-300 mt-2">The path of philosophical discrimination separating the eternal Real (Ātman) from the transient unreal.</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 text-sm block">Rāja / Dhyāna Yoga</span>
+            <p class="text-slate-300 mt-2">Mastery of the mind, breath, and inner energies through steady, unwavering meditation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SACRED STORIES VAULT TAB -->
+    <section id="tab-stories" class="tab-panel hidden space-y-6">
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="text-2xl font-bold cinzel-title text-amber-200">Sacred Stories Vault (कथा मञ्जरी)</h3>
+          <p class="text-xs sm:text-sm text-slate-400">Timeless spiritual allegories carrying moral, psychological, and cosmological truths.</p>
+        </div>
+      </div>
+
+      <!-- Stories Grid -->
+      <div id="storiesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </section>
+
+    <!-- 8. HISTORY & SAGES TAB -->
+    <section id="tab-history" class="tab-panel hidden space-y-8">
+      <div>
+        <h3 class="text-2xl font-bold cinzel-title text-amber-200">Cosmic Chronology & Sage Lineage (इतिहास)</h3>
+        <p class="text-xs sm:text-sm text-slate-400">The cyclical nature of time and the immortal torchbearers of Sanātana wisdom.</p>
+      </div>
+
+      <!-- The Four Yugas -->
+      <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-6">
+        <h4 class="text-xl font-bold text-amber-100 cinzel-title mb-4">The Four Cosmic Epochs (Caturyuga)</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+          <div class="p-4 bg-slate-950 rounded-xl border border-amber-500/30">
+            <span class="font-bold text-amber-300 text-sm block">1. Satya / Kṛta Yuga</span>
+            <p class="text-amber-500 font-medium">Golden Age of Truth (1,728,000 years)</p>
+            <p class="text-slate-300 mt-2">Dharma stands on all four legs. Humans possess natural spiritual vision; primary spiritual discipline is intense Dhyāna (meditation).</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 text-sm block">2. Tretā Yuga</span>
+            <p class="text-amber-500 font-medium">Silver Age (1,296,000 years)</p>
+            <p class="text-slate-300 mt-2">Dharma stands on three legs. Emergence of Sri Rama; primary spiritual discipline is Yajña (conscious sacrifice).</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 text-sm block">3. Dvāpara Yuga</span>
+            <p class="text-amber-500 font-medium">Bronze Age (864,000 years)</p>
+            <p class="text-slate-300 mt-2">Dharma stands on two legs. Emergence of Sri Krishna and the Kurukshetra war; primary spiritual discipline is Archana (temple worship).</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+            <span class="font-bold text-amber-300 text-sm block">4. Kali Yuga</span>
+            <p class="text-amber-500 font-medium">Current Age (432,000 years)</p>
+            <p class="text-slate-300 mt-2">Dharma stands on one leg. Material distraction reigns; however, liberation is easily attained simply through Nāmasmaraṇa (chanting divine names) and ethical action.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Great Rishis and Acharyas Timeline -->
+      <div class="bg-slate-900 border border-amber-500/30 rounded-2xl p-6">
+        <h4 class="text-xl font-bold text-amber-100 cinzel-title mb-4">Pivotal Luminaries & Revitalizers</h4>
+        <div class="space-y-4 text-xs sm:text-sm">
+          <div class="p-4 bg-slate-950 rounded-xl border-l-4 border-amber-500">
+            <span class="font-bold text-amber-300 text-base">The Saptarṣis (The Seven Primordial Sages)</span>
+            <p class="text-slate-300 mt-1">Agastya, Vasiṣṭha, Viśvāmitra, Jamadagni, Gautama, Atri, and Bharadvāja—the spiritual patriarchs who received Vedic mantras and carried them across geographies.</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border-l-4 border-amber-500">
+            <span class="font-bold text-amber-300 text-base">Maharṣi Vedavyāsa</span>
+            <p class="text-slate-300 mt-1">Organized the unified Veda into the Four Saṁhitās, composed the Mahābhārata, the Brahma Sūtras, and the 18 Purāṇas to preserve dharma across changing yugas.</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border-l-4 border-amber-500">
+            <span class="font-bold text-amber-300 text-base">Ādi Śaṅkarācārya (8th Century CE)</span>
+            <p class="text-slate-300 mt-1">Revived Advaita Vedānta across the length of Bhārata through razor-sharp debates, commented on the Prasthānatrayī, and established the 4 Amnāya Pīṭhams (Śṛṅgerī, Purī, Dvārakā, Joshīmaṭha).</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border-l-4 border-amber-500">
+            <span class="font-bold text-amber-300 text-base">Śrī Rāmānujācārya & Śrī Madhvācārya (11th–13th Century CE)</span>
+            <p class="text-slate-300 mt-1">Champions of Viśiṣṭādvaita (qualified non-dualism) and Dvaita (dualistic devotion), bringing social inclusion, temple reforms, and devotional theology to millions.</p>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border-l-4 border-amber-500">
+            <span class="font-bold text-amber-300 text-base">The Bhakti Movement & Modern Renaissance</span>
+            <p class="text-slate-300 mt-1">From Kabīr, Mīrābāī, Tulsīdās, and Caitanya Mahāprabhu to Swami Vivekananda and Sri Aurobindo—democratizing spiritual attainment and translating timeless truths for global consciousness.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. DHARMA TRIVIA QUIZ TAB -->
+    <section id="tab-quiz" class="tab-panel hidden space-y-6">
+      <div class="max-w-2xl mx-auto bg-slate-900 border border-amber-500/30 rounded-2xl p-6 sm:p-8">
+        <div class="text-center mb-6">
+          <span class="text-3xl">✨</span>
+          <h3 class="text-2xl font-bold cinzel-title text-amber-200 mt-2">Dharma & Scripture Trivia Quiz</h3>
+          <p class="text-xs text-slate-400 mt-1">Test your understanding of the Vedas, Upanishads, Puranas, and Epics.</p>
+        </div>
+
+        <div id="quizContainer">
+          <div class="flex justify-between items-center text-xs text-amber-400 mb-4 font-semibold">
+            <span id="quizQuestionNum">Question 1 of 5</span>
+            <span id="quizScoreText">Score: 0</span>
+          </div>
+
+          <div class="p-5 bg-slate-950 rounded-xl border border-slate-800 mb-6">
+            <h4 id="quizQuestionPrompt" class="text-base sm:text-lg font-semibold text-amber-100"></h4>
+          </div>
+
+          <div id="quizOptionsContainer" class="space-y-3"></div>
+
+          <div id="quizFeedbackBox" class="hidden mt-6 p-4 rounded-xl text-xs sm:text-sm"></div>
+
+          <button id="quizNextBtn" onclick="nextQuizQuestion()" class="hidden w-full mt-6 py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl transition">
+            Next Question →
+          </button>
+        </div>
+
+        <!-- Quiz Completion Screen -->
+        <div id="quizResultScreen" class="hidden text-center space-y-4 py-8">
+          <div class="text-5xl">🏆</div>
+          <h4 class="text-2xl font-bold cinzel-title text-amber-200">Sādhu! Sādhu! (Well Done!)</h4>
+          <p id="quizFinalScore" class="text-lg text-slate-200"></p>
+          <p id="quizFinalFeedback" class="text-xs text-slate-400 max-w-md mx-auto"></p>
+          <button onclick="restartQuiz()" class="px-6 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-semibold rounded-xl transition text-sm">
+            Retake Quiz
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. BOOKMARKS TAB -->
+    <section id="tab-bookmarks" class="tab-panel hidden space-y-6">
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="text-2xl font-bold cinzel-title text-amber-200">Saved Contemplations & Bookmarks</h3>
+          <p class="text-xs sm:text-sm text-slate-400">Items saved for your daily personal study and reflection.</p>
+        </div>
+        <button onclick="clearAllBookmarks()" class="text-xs text-red-400 hover:text-red-300">Clear All</button>
+      </div>
+      <div id="bookmarksList" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </section>
+
+  </main>
+
+  <!-- DETAIL MODAL DIALOG -->
+  <div id="detailModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="bg-slate-900 border border-amber-500/40 rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
+      <div class="p-6 border-b border-slate-800 flex justify-between items-start">
+        <div>
+          <span id="modalCategory" class="text-xs font-bold text-amber-400 uppercase tracking-widest"></span>
+          <h3 id="modalTitle" class="text-xl sm:text-2xl font-bold text-amber-100 cinzel-title mt-1"></h3>
+        </div>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-white text-xl p-1">✕</button>
+      </div>
+      <div id="modalContent" class="p-6 overflow-y-auto space-y-4 text-sm text-slate-300 leading-relaxed custom-scrollbar"></div>
+      <div class="p-4 border-t border-slate-800 flex justify-between items-center bg-slate-950">
+        <button id="modalBookmarkBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs transition">
+          <span>🔖</span>
+          <span>Save to Bookmarks</span>
+        </button>
+        <button onclick="closeModal()" class="px-4 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-semibold">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-950 border-t border-amber-900/30 py-8 text-center text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 space-y-2">
+      <p class="sanskrit-text text-amber-300 text-sm">ॐ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः । सर्वे भद्राणि पश्यन्तु मा कश्चिद्दुःखभाग्भवेत् ॥</p>
+      <p class="text-slate-400">"May all beings be happy, may all be free from illness, may all see what is auspicious, may no one suffer."</p>
+      <p class="pt-2 text-[11px] text-slate-500">Sanātana Dharma Knowledge Engine • Comprehensive Scripture & Philosophy Reference</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DATA & APP LOGIC -->
+  <script>
+    // --- 1. CORE DATA COLLECTIONS ---
+
+    const queriesData = [
+      {
+        id: "q1",
+        category: "theology",
+        question: "What does 'Sanātana Dharma' really mean? Is it a religion?",
+        summary: "Sanātana means eternal, without beginning or end. Dharma means that which upholds, sustains, and keeps the cosmos in harmony.",
+        answer: "The term 'Hinduism' was originally a geographic and linguistic designation given by Persians and Greeks referring to people living beyond the Sindhu (Indus) river. The authentic scriptural designation is 'Sanātana Dharma'. Unlike historical creeds founded at a specific date by a single prophet with a single book, Sanātana Dharma is an eternal, cosmic matrix of spiritual truths (Rta and Dharma). It is not a rigid belief system demanding blind faith, but a pragmatic science of living, ethical order, and consciousness expansion accessible to all seekers through inquiry (Jijñāsā)."
+      },
+      {
+        id: "q2",
+        category: "theology",
+        question: "Is Sanātana Dharma monotheistic, polytheistic, or pantheistic?",
+        summary: "The Rigveda clarifies: 'Ekam Sat Vipra Bahudha Vadanti' — Truth is One, the wise speak of It by many names.",
+        answer: "Sanātana Dharma transcends simplistic Western categories like monotheism or polytheism. Its worldview is best described as Panentheism or Monism (Advaita/Brahmavāda). Supreme Reality is Brahman—the uncaused, infinite, genderless, all-pervading divine Consciousness. When unmanifest, It is Nirguṇa Brahman. When reflected through the cosmic creative matrix (Māyā), It is experienced as Īśvara (the personal God with attributes). The diverse deities (Devas and Devis) are not competing gods, but sacred archetypes, rays of the same single Sun, allowing every human mind to connect with the infinite through a form that resonates with their heart."
+      },
+      {
+        id: "q3",
+        category: "practices",
+        question: "Why do Hindus worship Mūrtis (Images)? Is it idol worship?",
+        summary: "Mūrti Pūjā is not the worship of a stone, but the adoration of the Infinite divine through a consecrated medium.",
+        answer: "In Sanskrit, the word is 'Mūrti' (manifestation) or 'Vigraha' (that which grasps the intangible). The Upaniṣads acknowledge that while the Divine is formless (Nirākāra), the human mind cannot easily meditate on an abstract void without mental drifting. A consecrated mūrti (through Prāṇa Pratiṣṭhā) functions like a spiritual focal lens or antenna. Just as you do not worship the paper of a national flag but the nation it embodies, a devotee adores the omnipresent Divine through the sacred form."
+      },
+      {
+        id: "q4",
+        category: "philosophy",
+        question: "How does Karma work? Does it mean our lives are completely predestined?",
+        summary: "Karma is not fatalism; it is the universal law of cause and effect combined with continuous free will.",
+        answer: "Karma literally means 'action'. It operates on three levels: 1) Sañcita Karma: the vast storehouse of past impressions across lifetimes; 2) Prārabdha Karma: the specific portion of past impressions ripe for fruition in this current life (the cards you were dealt at birth, like family and bodily traits); and 3) Āgāmī / Kriyamāṇa Karma: the choices and actions you make right now using your conscious free will. While Prārabdha sets the stage, your response to it in the present moment is entirely free. Just as a skilled card player can win even with a difficult hand, spiritual wisdom and conscious action elevate one above fatalism."
+      },
+      {
+        id: "q5",
+        category: "society",
+        question: "What is the scriptural truth of Varna vs. the hereditary caste system?",
+        summary: "The Gita explicitly bases Varna on innate temperament (Guṇa) and actions (Karma), not heredity by birth.",
+        answer: "In the Bhagavad Gītā (4.13), Lord Krishna states: 'Cāturvarṇyaṁ mayā sṛṣṭaṁ guṇa-karma-vibhāgaśaḥ' — The fourfold order was created by Me based on innate qualities (Guṇas: Sattva, Rajas, Tamas) and vocations (Karma), NEVER by birth (Janma). In ancient Vedic times, Varna was fluid: Sage Viśvāmitra was born a warrior (Kṣatriya) but became a supreme Brahmarṣi; Sage Vālmīki was a highway bandit before composing the Rāmāyaṇa; Sage Vedavyāsa was born to a fisherwoman (Satyavatī). Over centuries, this dynamic division of labor ossified into the rigid, oppressive hereditary Jāti system, which contradicted the core Vedic vision of Ātman equality."
+      },
+      {
+        id: "q6",
+        category: "philosophy",
+        question: "What is the ultimate purpose of human birth?",
+        summary: "Attaining Mokṣa (liberation from ignorance) while harmoniously fulfilling Dharma, Artha, and Kāma.",
+        answer: "Human birth is celebrated in the scriptures as a rare gift (Durlabha Mānava Janma) because only humans possess the faculty of Buddhi (higher intellect and self-inquiry). The ultimate goal is Mokṣa—liberation from the illusion of separation (Māyā) and realization of one's true nature as eternal, blissful Sat-Cit-Ānanda (Truth, Pure Consciousness, and Absolute Bliss)."
+      }
+    ];
+
+    const upanishadsData = [
+      {
+        id: "u1",
+        name: "Īśa Upaniṣad",
+        sanskrit: "ईशोपनिषद्",
+        veda: "Śukla Yajurveda",
+        mantras: 18,
+        summary: "Seeing the Divine in all things; renunciation and detached action.",
+        highlight: "ईशा वास्यमिदं सर्वं यत्किञ्च जगत्यां जगत् । तेन त्यक्तेन भुञ्जीथा मा गृधः कस्यस्विद्धनम् ॥",
+        meaning: "All this is enveloped by the Divine. Enjoy through renunciation; do not covet anyone's wealth.",
+        details: "Though the shortest among the principal Upanishads, it holds pride of place as the 40th chapter of the Vajasaneyi Samhita. It reconciles spiritual renunciation with social action in the world."
+      },
+      {
+        id: "u2",
+        name: "Kena Upaniṣad",
+        sanskrit: "केनोपनिषद्",
+        veda: "Sāmaveda",
+        mantras: 35,
+        summary: "Inquiring into the ultimate prompter of the mind and senses.",
+        highlight: "केनेषितं पतति प्रेषितं मनः । केन प्राणः प्रथमः प्रैति युक्तः ॥",
+        meaning: "Prompted by whom does the mind soar to its objects? Directed by whom does the first breath move forth?",
+        details: "Contains the allegory of the Yakṣa and the Devas, showing how the gods of Fire (Agni) and Wind (Vāyu) could not burn or blow away a single straw without the power of Brahman."
+      },
+      {
+        id: "u3",
+        name: "Kaṭha Upaniṣad",
+        sanskrit: "कठोपनिषद्",
+        veda: "Kṛṣṇa Yajurveda",
+        mantras: 119,
+        summary: "Nachiketā's dialogue with Lord Yama on the mystery of life after death.",
+        highlight: "उत्तिष्ठत जाग्रत प्राप्य वरान्निबोधत । क्षुरस्य धारा निशिता दुरत्यया दुर्गं पथस्तत्कवयो वदन्ति ॥",
+        meaning: "Arise! Awake! Approach the wise and realize the Truth! The path is sharp like a razor's edge, difficult to tread.",
+        details: "Famous for the Chariot Analogy: the Ātman is the Lord of the Chariot, the physical body is the chariot, the intellect (Buddhi) is the charioteer, the mind (Manas) is the reins, and the senses (Indriyas) are the wild horses."
+      },
+      {
+        id: "u4",
+        name: "Māṇḍūkya Upaniṣad",
+        sanskrit: "माण्डूक्योपनिषद्",
+        veda: "Atharvaveda",
+        mantras: 12,
+        summary: "The analysis of the 4 states of consciousness via AUM.",
+        highlight: "सर्वं ह्येतद् ब्रह्म अयमात्मा ब्रह्म सोऽयमात्मा चतुष्पात् ॥",
+        meaning: "All this is verily Brahman; this Self is Brahman, and this Self has four quarters.",
+        details: "Analyzes the syllable AUM: 'A' represents the waking state (Jāgrat); 'U' represents the dream state (Svapna); 'M' represents deep dreamless sleep (Suṣupti); and the silence following it is Turīya—the transcendental pure consciousness."
+      },
+      {
+        id: "u5",
+        name: "Muṇḍaka Upaniṣad",
+        sanskrit: "मुण्डकोपनिषद्",
+        veda: "Atharvaveda",
+        mantras: 64,
+        summary: "Para-Vidyā vs. Apara-Vidyā; the origin of the national motto 'Satyameva Jayate'.",
+        highlight: "सत्यमेव जयते नानृतं सत्येन पन्था विततो देवयानः ॥",
+        meaning: "Truth alone triumphs, not falsehood; through truth the divine path is spread out.",
+        details: "Features the celebrated metaphor of two birds sitting on the same tree: one bird eats the sweet and bitter fruits (the ego/Jīva), while the other bird watches peacefully in quiet majesty (the witness Ātman)."
+      },
+      {
+        id: "u6",
+        name: "Taittirīya Upaniṣad",
+        sanskrit: "तैत्तिरीयोपनिषद्",
+        veda: "Kṛṣṇa Yajurveda",
+        mantras: 31,
+        summary: "The Pañcakośa (Five Sheaths) model of human anatomy and ethics.",
+        highlight: "सत्यं वद । धर्मं चर । स्वाध्यायान्मा प्रमदः ॥",
+        meaning: "Speak the truth. Conduct yourself with righteousness. Never neglect self-study.",
+        details: "Reveals how the pure Self is veiled by five progressive layers: Annamaya (food/physical), Prāṇamaya (vital breath), Manomaya (mind/emotions), Vijñānamaya (intellect), and Ānandamaya (sheath of bliss)."
+      },
+      {
+        id: "u7",
+        name: "Chāndogya Upaniṣad",
+        sanskrit: "छान्दोग्योपनिषद्",
+        veda: "Sāmaveda",
+        mantras: 628,
+        summary: "Uddālaka's teachings to his son Śvetaketu; 'Tat Tvam Asi'.",
+        highlight: "स य एषोऽणिमैतदात्म्यमिदं सर्वं तत्सत्यं स आत्मा तत्त्वमसि श्वेतकेतो ॥",
+        meaning: "That which is the subtlest essence—all this has That as its Self. That is the Truth. That is the Self. That Thou Art, O Śvetaketu!",
+        details: "Contains the famous salt-in-water experiment: Uddālaka tells his son to place salt in water overnight. The next morning the salt cannot be seen, but water taken from anywhere tastes salty—illustrating how Brahman pervades everything unseen."
+      },
+      {
+        id: "u8",
+        name: "Bṛhadāraṇyaka Upaniṣad",
+        sanskrit: "बृहदारण्यकोपनिषद्",
+        veda: "Śukla Yajurveda",
+        mantras: 435,
+        summary: "Sage Yājñavalkya's monumental dialogues with Maitreyī and Gārgī.",
+        highlight: "न वा अरे पत्युः कामाय पतिः प्रियो भवति, आत्मनस्तु कामाय पतिः प्रियो भवति ॥",
+        meaning: "Verily, not for the sake of the husband is the husband dear, but for the sake of the Self (Ātman) within him is he dear.",
+        details: "The largest of the Upanishads. Contains the sublime prayer 'Asato mā sadgamaya' and the radical negative method of self-inquiry: 'Neti, Neti' (Not this, Not this)."
+      }
+    ];
+
+    const puranasData = [
+      {
+        id: "p1",
+        name: "Bhāgavata Purāṇa (Śrīmad Bhāgavatam)",
+        category: "vaishnava",
+        verses: "18,000 Verses • 12 Skandhas",
+        summary: "The crown jewel of Bhakti literature detailing the Daśāvatāras and Krishna's life.",
+        description: "Focuses on supreme devotion (Bhakti). Contains the stories of Dhruva, Prahlāda, the churning of the milk ocean, and the sublime 10th Canto celebrating Sri Krishna's divine sports (Līlās) and wisdom."
+      },
+      {
+        id: "p2",
+        name: "Viṣṇu Purāṇa",
+        category: "vaishnava",
+        verses: "23,000 Verses • 6 Aṁśas",
+        summary: "One of the most ancient and structured Puranas narrated by Sage Parāśara.",
+        description: "Presents the five classical characteristics of a Purana flawlessly: primary creation, recreation, genealogies of gods and kings, manvantaras, and the avatars of Vishnu."
+      },
+      {
+        id: "p3",
+        name: "Śiva Purāṇa",
+        category: "shaiva",
+        verses: "24,000 Verses • 7 Saṁhitās",
+        summary: "Glories of Lord Shiva, the origin of the Jyotirliṅgas, and the marriage to Pārvatī.",
+        description: "Explores the cosmic dance (Tāṇḍava), the meaning of the Liṅga as a pillar of cosmic light, the legend of Tārakāsura's defeat by Kārttikeya, and the path of devotional Śaivism."
+      },
+      {
+        id: "p4",
+        name: "Mārkaṇḍeya Purāṇa",
+        category: "brahma",
+        verses: "9,000 Verses",
+        summary: "Contains the famed Devī Māhātmyam (Durgā Saptaśatī).",
+        description: "Revered by Śāktas as the ultimate text on the Supreme Goddess as cosmic power (Śakti), recounting the battle between Durgā and Mahiṣāsura, and sage Mārkaṇḍeya's meditations."
+      },
+      {
+        id: "p5",
+        name: "Skanda Purāṇa",
+        category: "shaiva",
+        verses: "81,000 Verses (Largest Purana)",
+        summary: "Encyclopedic pilgrimage geography, including the celebrated Kāśī Khaṇḍa.",
+        description: "The largest of all 18 Puranas. Details the birth of Skanda (Murugan/Kārttikeya) and serves as an unmatched geographical, spiritual, and historical gazetteer of ancient holy sites across India."
+      },
+      {
+        id: "p6",
+        name: "Garuḍa Purāṇa",
+        category: "vaishnava",
+        verses: "19,000 Verses",
+        summary: "Dialogue between Lord Vishnu and Garuda on karma, death, and liberation.",
+        description: "Famous for its Sāroddhāra section dealing with the soul's journey after physical death, funeral rites, the mechanics of rebirth, and also contains extensive chapters on medicine, astrology, and gems."
+      },
+      {
+        id: "p7",
+        name: "Agni Purāṇa",
+        category: "shaiva",
+        verses: "15,400 Verses",
+        summary: "Encyclopedic manual of Vedic sciences, architecture, warfare, and poetry.",
+        description: "Narrated by the fire god Agni to sage Vasiṣṭha. It is considered an ancient encyclopedia covering statecraft, temple iconography, grammar, metrics, medicine, and martial arts (Dhanurveda)."
+      },
+      {
+        id: "p8",
+        name: "Brahmāṇḍa Purāṇa",
+        category: "brahma",
+        verses: "18,000 Verses",
+        summary: "The cosmic egg, history of dynasties, and contains the Lalitā Sahasranāma.",
+        description: "Describes the creation of the cosmic egg (Brahmāṇḍa) and includes two of the most chanted hymns in Sanātana tradition: the Lalitā Sahasranāma and the Āditya Hṛdayam Stotram."
+      }
+    ];
+
+    const storiesData = [
+      {
+        id: "s1",
+        title: "Samudra Manthan (Churning of the Cosmic Ocean)",
+        source: "Bhāgavata & Viṣṇu Purāṇas",
+        moral: "Spiritual purification requires churning within; toxic attachments must be digested through grace before divine nectar emerges.",
+        text: "When the Devas lost their celestial vigor through Sage Durvāsā's curse, Lord Vishnu counseled them to cooperate with the Asuras to churn the Ocean of Milk (Kṣīrasāgara) using Mount Mandara as the rod and the serpent king Vāsuki as the rope. As the ocean was churned, the lethal poison Hālahala arose first, threatening to incinerate creation. In boundless compassion, Lord Shiva drank the poison, holding it in his throat, which turned blue (Nilakaṇṭha). Subsequently, 14 divine gems emerged, including Goddess Lakṣmī, Kāmadhenu, and finally Dhanvantari carrying the pot of immortality (Amṛta)."
+      },
+      {
+        id: "s2",
+        title: "Nachiketā and the Lord of Death",
+        source: "Kaṭha Upaniṣad",
+        moral: "True seekers choose the path of spiritual good (Śreyas) over transient sensual pleasure (Preyas).",
+        text: "Young Nachiketā was disturbed when his father, Vājaśravas, performed a sacrifice donating barren, dying cows to priests. When Nachiketā questioned his father, the exasperated father proclaimed: 'I give you to Yama (Death)!' True to his word, Nachiketā traveled to the abode of Yama and waited three days without food. Impressed by the boy's perseverance, Yama offered him three boons. For his third boon, Nachiketā refused kingdoms, gold, and maidens, demanding instead the secret of what happens to the Self beyond death—compelling Yama to reveal the eternal nature of the unslain Ātman."
+      },
+      {
+        id: "s3",
+        title: "Bhakta Prahlāda & The Narasimha Avatāra",
+        source: "Bhāgavata Purāṇa (7th Skandha)",
+        moral: "The Divine is omnipresent and ever-protects those who harbor unconditional faith.",
+        text: "The demon king Hiraṇyakaśipu had gained a boon from Brahmā that he could not be killed by day or night, inside or outside, by man or beast, on earth or in the sky, with any weapon. Blinded by pride, he demanded worship as God. But his own son, Prahlāda, remained devoted solely to Lord Vishnu. Enraged, Hiraṇyakaśipu subjected his son to fire, poison, and trampling elephants, yet Prahlāda emerged unharmed. When the tyrant kicked a stone pillar mocking: 'Is your Vishnu in this pillar?', Lord Vishnu burst forth as Narasimha (half-man, half-lion) at twilight on the threshold, placing the demon on his lap and slaying him—satisfying every condition of the boon."
+      },
+      {
+        id: "s4",
+        title: "Sāvitrī and Satyavān (Conquering Destiny)",
+        source: "Mahābhārata (Vana Parva)",
+        moral: "Unyielding intellect, Dharma, and selfless love can dissolve the darkest destiny.",
+        text: "Princess Sāvitrī chose to marry the impoverished prince Satyavān, despite Sage Nārada's warning that Satyavān was destined to die exactly one year from that day. When the fateful day arrived in the forest, Lord Yama himself came to collect Satyavān's life force. Sāvitrī followed Yama into the realm of the dead. With profound philosophical dialogues on truth, dharma, and righteous governance, she repeatedly delighted Yama, who granted her multiple boons—until she astutely asked for a boon to bear a hundred noble sons. When Yama granted it, she pointed out that she could not bear sons without her devoted husband, compelling Yama to return Satyavān's life."
+      }
+    ];
+
+    const quizQuestions = [
+      {
+        prompt: "Which Veda is the oldest known spiritual text in human history?",
+        options: ["Sāmaveda", "Rigveda", "Yajurveda", "Atharvaveda"],
+        correctIndex: 1,
+        explanation: "The Rigveda is the oldest Veda, comprising 10 Mandalas and 1,028 Suktas cognized by the ancient Rishis."
+      },
+      {
+        prompt: "What does the famous Upanishadic Mahāvākya 'Tat Tvam Asi' mean?",
+        options: ["Consciousness is Brahman", "I am Brahman", "That Thou Art", "This Self is Brahman"],
+        correctIndex: 2,
+        explanation: "'Tat Tvam Asi' (That Thou Art) is from the Chāndogya Upaniṣad (Sāmaveda), revealing the identity of the individual self with the supreme Absolute."
+      },
+      {
+        prompt: "In the Kaṭha Upaniṣad's Chariot Analogy, what does the charioteer represent?",
+        options: ["The physical body", "The intellect (Buddhi)", "The senses", "The wild horses"],
+        correctIndex: 1,
+        explanation: "The intellect (Buddhi) is the charioteer, who holds the reins of the mind (Manas) to guide the senses (Indriyas)."
+      },
+      {
+        prompt: "The celebrated Devī Māhātmyam (Durgā Saptaśatī) is found within which Purana?",
+        options: ["Mārkaṇḍeya Purāṇa", "Viṣṇu Purāṇa", "Śiva Purāṇa", "Skanda Purāṇa"],
+        correctIndex: 0,
+        explanation: "The Devī Māhātmyam constitutes chapters 81 to 93 of the Mārkaṇḍeya Purāṇa."
+      },
+      {
+        prompt: "Which Book (Kāṇḍa) of the Vālmīki Rāmāyaṇa details Hanuman's leap across the ocean and locating Sita in Lanka?",
+        options: ["Bāla Kāṇḍa", "Kiṣkindhā Kāṇḍa", "Sundara Kāṇḍa", "Yuddha Kāṇḍa"],
+        correctIndex: 2,
+        explanation: "The Sundara Kāṇḍa ('The Beautiful Book') is dedicated to Hanuman's heroic endeavors, intellect, and devotion."
+      }
+    ];
+
+    // --- 2. STATE MANAGEMENT ---
+    let currentTab = 'overview';
+    let currentQuizIndex = 0;
+    let quizScore = 0;
+    let savedBookmarks = [];
+    let isDronePlaying = false;
+    let audioCtx = null;
+    let droneOsc1 = null, droneOsc2 = null, droneGain = null;
+
+    // Load saved bookmarks from localStorage
+    function loadBookmarks() {
+      try {
+        const stored = localStorage.getItem('sanatana_bookmarks');
+        if (stored) savedBookmarks = JSON.parse(stored);
+      } catch (e) {
+        savedBookmarks = [];
+      }
+      updateBookmarkCounter();
+    }
+
+    function saveBookmarks() {
+      try {
+        localStorage.setItem('sanatana_bookmarks', JSON.stringify(savedBookmarks));
+      } catch (e) {}
+      updateBookmarkCounter();
+    }
+
+    function updateBookmarkCounter() {
+      const countEl = document.getElementById('bookmarkCount');
+      if (countEl) countEl.innerText = savedBookmarks.length;
+    }
+
+    // --- 3. NAVIGATION TABS ---
+    function switchTab(tabId) {
+      currentTab = tabId;
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
+      const activePanel = document.getElementById(`tab-${tabId}`);
+      if (activePanel) activePanel.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-tab').forEach(tabBtn => {
+        if (tabBtn.getAttribute('data-tab') === tabId) {
+          tabBtn.className = "nav-tab px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-colors bg-amber-600 text-white font-semibold";
+        } else {
+          tabBtn.className = "nav-tab px-3.5 py-1.5 rounded-lg whitespace-nowrap transition-colors hover:bg-slate-800 text-slate-300";
+        }
+      });
+
+      if (tabId === 'bookmarks') renderBookmarksTab();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- 4. RENDER MODULES ---
+
+    // Render Queries
+    function renderQueries(filter = 'all') {
+      const container = document.getElementById('queriesListContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const filtered = filter === 'all' ? queriesData : queriesData.filter(q => q.category === filter);
+
+      filtered.forEach(q => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-amber-500/40 transition-all";
+        card.innerHTML = `
+          <div class="flex justify-between items-start gap-4">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/10 text-amber-400">${q.category}</span>
+              <h4 class="text-base sm:text-lg font-bold text-amber-100 mt-2">${q.question}</h4>
+              <p class="text-xs text-amber-300/90 italic mt-1">${q.summary}</p>
+            </div>
+            <button onclick="toggleBookmark('${q.id}', 'query', '${escapeStr(q.question)}', '${escapeStr(q.summary)}')" class="text-slate-500 hover:text-amber-400 p-1 text-sm" title="Bookmark">
+              ${isBookmarked(q.id) ? '🔖' : '☆'}
+            </button>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            ${q.answer}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterQueries(cat) {
+      document.querySelectorAll('.query-filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-cat') === cat) {
+          btn.className = "query-filter-btn px-3 py-1 rounded-full bg-amber-600 text-white font-medium";
+        } else {
+          btn.className = "query-filter-btn px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700";
+        }
+      });
+      renderQueries(cat);
+    }
+
+    // Render Upanishads
+    function renderUpanishads() {
+      const container = document.getElementById('upanishadsGrid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      upanishadsData.forEach(u => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between hover:border-amber-500/50 transition-all";
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-amber-400 font-semibold">${u.veda}</span>
+              <span class="text-slate-400">${u.mantras} Mantras</span>
+            </div>
+            <h4 class="text-xl font-bold text-amber-100 cinzel-title mt-2">${u.name}</h4>
+            <p class="sanskrit-text text-amber-300 text-sm mt-0.5">${u.sanskrit}</p>
+            <p class="text-xs text-slate-300 mt-2">${u.summary}</p>
+            
+            <div class="mt-4 p-3 bg-slate-950 rounded-xl border border-slate-800">
+              <p class="sanskrit-text text-xs text-amber-200">${u.highlight}</p>
+              <p class="text-[11px] text-slate-400 italic mt-1">"${u.meaning}"</p>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-xs">
+            <button onclick="openModal('${escapeStr(u.name)}', 'Upanishad', '${escapeStr(u.details + '<br><br><strong>Veda Source:</strong> ' + u.veda + '<br><br><strong>Core Teaching:</strong> ' + u.summary)}', '${u.id}')" class="text-amber-400 hover:text-amber-300 font-medium">Read Full Exegesis →</button>
+            <button onclick="toggleBookmark('${u.id}', 'upanishad', '${escapeStr(u.name)}', '${escapeStr(u.summary)}')" class="text-slate-500 hover:text-amber-400 text-sm">
+              ${isBookmarked(u.id) ? '🔖' : '☆'}
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Render Puranas
+    function renderPuranas(filter = 'all') {
+      const container = document.getElementById('puranasGrid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const filtered = filter === 'all' ? puranasData : puranasData.filter(p => p.category === filter);
+
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-amber-500/40 transition-all flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 font-semibold uppercase">${p.category}</span>
+              <span class="text-slate-400">${p.verses}</span>
+            </div>
+            <h4 class="text-lg font-bold text-amber-100 cinzel-title mt-2">${p.name}</h4>
+            <p class="text-xs text-amber-300/90 font-medium mt-1">${p.summary}</p>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">${p.description}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-xs">
+            <span class="text-slate-500">Mahāpurāṇa</span>
+            <button onclick="toggleBookmark('${p.id}', 'purana', '${escapeStr(p.name)}', '${escapeStr(p.summary)}')" class="text-slate-500 hover:text-amber-400 text-sm">
+              ${isBookmarked(p.id) ? '🔖' : '☆'}
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterPuranas(cat) {
+      document.querySelectorAll('.purana-filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-cat') === cat) {
+          btn.className = "purana-filter-btn px-3 py-1 rounded-full bg-amber-600 text-white font-medium";
+        } else {
+          btn.className = "purana-filter-btn px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700";
+        }
+      });
+      renderPuranas(cat);
+    }
+
+    // Render Stories
+    function renderStories() {
+      const container = document.getElementById('storiesGrid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      storiesData.forEach(s => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-amber-500/40 transition flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-amber-400 font-semibold">${s.source}</span>
+              <button onclick="toggleBookmark('${s.id}', 'story', '${escapeStr(s.title)}', '${escapeStr(s.moral)}')" class="text-slate-500 hover:text-amber-400 text-sm">
+                ${isBookmarked(s.id) ? '🔖' : '☆'}
+              </button>
+            </div>
+            <h4 class="text-xl font-bold text-amber-100 cinzel-title mt-2">${s.title}</h4>
+            <div class="mt-2 p-2.5 bg-amber-950/30 rounded-lg border border-amber-500/20 text-xs text-amber-200">
+              <strong>Moral Essence:</strong> ${s.moral}
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 mt-3 leading-relaxed">${s.text}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- 5. GLOBAL SEARCH ENGINE ---
+    function handleSearch(term) {
+      const resultsContainer = document.getElementById('searchResultsContainer');
+      const resultsList = document.getElementById('searchResultsList');
+      const resultsCount = document.getElementById('searchResultsCount');
+      const clearBtn = document.getElementById('clearSearchBtn');
+
+      if (!term || term.trim().length === 0) {
+        resultsContainer.classList.add('hidden');
+        clearBtn.classList.add('hidden');
+        return;
+      }
+
+      clearBtn.classList.remove('hidden');
+      const cleanTerm = term.toLowerCase().trim();
+      const matched = [];
+
+      // Search Queries
+      queriesData.forEach(q => {
+        if (q.question.toLowerCase().includes(cleanTerm) || q.answer.toLowerCase().includes(cleanTerm)) {
+          matched.push({ type: 'Query / Doubt', title: q.question, snippet: q.summary, tab: 'queries' });
+        }
+      });
+
+      // Search Upanishads
+      upanishadsData.forEach(u => {
+        if (u.name.toLowerCase().includes(cleanTerm) || u.sanskrit.includes(cleanTerm) || u.details.toLowerCase().includes(cleanTerm) || u.summary.toLowerCase().includes(cleanTerm)) {
+          matched.push({ type: 'Upanishad', title: `${u.name} (${u.sanskrit})`, snippet: u.summary, tab: 'upanishads' });
+        }
+      });
+
+      // Search Puranas
+      puranasData.forEach(p => {
+        if (p.name.toLowerCase().includes(cleanTerm) || p.description.toLowerCase().includes(cleanTerm) || p.summary.toLowerCase().includes(cleanTerm)) {
+          matched.push({ type: 'Purana', title: p.name, snippet: p.summary, tab: 'puranas' });
+        }
+      });
+
+      // Search Stories
+      storiesData.forEach(s => {
+        if (s.title.toLowerCase().includes(cleanTerm) || s.text.toLowerCase().includes(cleanTerm) || s.moral.toLowerCase().includes(cleanTerm)) {
+          matched.push({ type: 'Sacred Story', title: s.title, snippet: s.moral, tab: 'stories' });
+        }
+      });
+
+      resultsList.innerHTML = '';
+      resultsCount.innerText = `${matched.length} Result${matched.length === 1 ? '' : 's'} Found`;
+
+      if (matched.length === 0) {
+        resultsList.innerHTML = `<p class="text-xs text-slate-400 py-2">No matching scriptures or stories found for "${term}". Try terms like "Gita", "Yama", "Shiva", "Brahman", or "Karma".</p>`;
+      } else {
+        matched.forEach(item => {
+          const div = document.createElement('div');
+          div.className = "p-2.5 bg-slate-950 hover:bg-slate-800 rounded-lg cursor-pointer border border-slate-800 transition";
+          div.onclick = () => {
+            resultsContainer.classList.add('hidden');
+            switchTab(item.tab);
+          };
+          div.innerHTML = `
+            <div class="flex justify-between items-center text-[10px] text-amber-400 font-bold uppercase">
+              <span>${item.type}</span>
+              <span class="text-slate-500">Click to visit tab →</span>
+            </div>
+            <div class="text-xs font-semibold text-amber-100 mt-0.5">${item.title}</div>
+            <div class="text-[11px] text-slate-400 mt-0.5 line-clamp-1">${item.snippet}</div>
+          `;
+          resultsList.appendChild(div);
+        });
+      }
+
+      resultsContainer.classList.remove('hidden');
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('globalSearchInput');
+      input.value = '';
+      handleSearch('');
+    }
+
+    // --- 6. DHARMA QUIZ LOGIC ---
+    function renderQuizQuestion() {
+      const q = quizQuestions[currentQuizIndex];
+      document.getElementById('quizQuestionNum').innerText = `Question ${currentQuizIndex + 1} of ${quizQuestions.length}`;
+      document.getElementById('quizScoreText').innerText = `Score: ${quizScore}`;
+      document.getElementById('quizQuestionPrompt').innerText = q.prompt;
+
+      const optsContainer = document.getElementById('quizOptionsContainer');
+      optsContainer.innerHTML = '';
+
+      const feedbackBox = document.getElementById('quizFeedbackBox');
+      feedbackBox.className = "hidden mt-6 p-4 rounded-xl text-xs sm:text-sm";
+      document.getElementById('quizNextBtn').classList.add('hidden');
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "quiz-opt-btn w-full text-left p-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs sm:text-sm text-slate-200 font-medium transition flex items-center justify-between";
+        btn.innerHTML = `<span>${opt}</span><span class="text-slate-500">○</span>`;
+        btn.onclick = () => selectQuizAnswer(idx);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function selectQuizAnswer(selectedIndex) {
+      const q = quizQuestions[currentQuizIndex];
+      const optButtons = document.querySelectorAll('.quiz-opt-btn');
+      optButtons.forEach(btn => btn.disabled = true);
+
+      const feedbackBox = document.getElementById('quizFeedbackBox');
+      const isCorrect = selectedIndex === q.correctIndex;
+
+      if (isCorrect) {
+        quizScore += 10;
+        document.getElementById('quizScoreText').innerText = `Score: ${quizScore}`;
+        optButtons[selectedIndex].className = "quiz-opt-btn w-full text-left p-3.5 rounded-xl bg-emerald-950/80 border border-emerald-500 text-emerald-200 font-medium text-xs sm:text-sm flex items-center justify-between";
+        optButtons[selectedIndex].innerHTML = `<span>${q.options[selectedIndex]}</span><span>✓</span>`;
+        feedbackBox.className = "mt-6 p-4 rounded-xl text-xs sm:text-sm bg-emerald-950/50 border border-emerald-500/30 text-emerald-300";
+        feedbackBox.innerHTML = `<strong>Correct!</strong> ${q.explanation}`;
+      } else {
+        optButtons[selectedIndex].className = "quiz-opt-btn w-full text-left p-3.5 rounded-xl bg-red-950/80 border border-red-500 text-red-200 font-medium text-xs sm:text-sm flex items-center justify-between";
+        optButtons[selectedIndex].innerHTML = `<span>${q.options[selectedIndex]}</span><span>✗</span>`;
+        
+        optButtons[q.correctIndex].className = "quiz-opt-btn w-full text-left p-3.5 rounded-xl bg-emerald-950/80 border border-emerald-500 text-emerald-200 font-medium text-xs sm:text-sm flex items-center justify-between";
+        optButtons[q.correctIndex].innerHTML = `<span>${q.options[q.correctIndex]}</span><span>✓</span>`;
+        
+        feedbackBox.className = "mt-6 p-4 rounded-xl text-xs sm:text-sm bg-red-950/50 border border-red-500/30 text-red-300";
+        feedbackBox.innerHTML = `<strong>Incorrect.</strong> ${q.explanation}`;
+      }
+
+      feedbackBox.classList.remove('hidden');
+      document.getElementById('quizNextBtn').classList.remove('hidden');
+    }
+
+    function nextQuizQuestion() {
+      currentQuizIndex++;
+      if (currentQuizIndex < quizQuestions.length) {
+        renderQuizQuestion();
+      } else {
+        showQuizResults();
+      }
+    }
+
+    function showQuizResults() {
+      document.getElementById('quizContainer').classList.add('hidden');
+      const resultScreen = document.getElementById('quizResultScreen');
+      resultScreen.classList.remove('hidden');
+
+      const maxScore = quizQuestions.length * 10;
+      document.getElementById('quizFinalScore').innerText = `Your Final Score: ${quizScore} / ${maxScore}`;
+
+      let msg = "";
+      if (quizScore === maxScore) msg = "Outstanding! You possess deep scriptural clarity and profound understanding of the sacred traditions.";
+      else if (quizScore >= 30) msg = "Great achievement! You have a solid grasp of the core Vedic concepts and epics.";
+      else msg = "A good start to your sacred journey. Explore the Vedas, Upanishads, and Stories tabs to deepen your insight!";
+
+      document.getElementById('quizFinalFeedback').innerText = msg;
+    }
+
+    function restartQuiz() {
+      currentQuizIndex = 0;
+      quizScore = 0;
+      document.getElementById('quizResultScreen').classList.add('hidden');
+      document.getElementById('quizContainer').classList.remove('hidden');
+      renderQuizQuestion();
+    }
+
+    // --- 7. BOOKMARKS MANAGEMENT ---
+    function isBookmarked(id) {
+      return savedBookmarks.some(item => item.id === id);
+    }
+
+    function toggleBookmark(id, type, title, snippet) {
+      const idx = savedBookmarks.findIndex(item => item.id === id);
+      if (idx >= 0) {
+        savedBookmarks.splice(idx, 1);
+      } else {
+        savedBookmarks.push({ id, type, title, snippet });
+      }
+      saveBookmarks();
+      // Re-render views
+      if (currentTab === 'queries') renderQueries();
+      if (currentTab === 'upanishads') renderUpanishads();
+      if (currentTab === 'puranas') renderPuranas();
+      if (currentTab === 'stories') renderStories();
+      if (currentTab === 'bookmarks') renderBookmarksTab();
+    }
+
+    function renderBookmarksTab() {
+      const container = document.getElementById('bookmarksList');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (savedBookmarks.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center text-slate-400 space-y-2">
+            <div class="text-4xl">🔖</div>
+            <p class="text-base font-semibold text-slate-300">No saved items yet.</p>
+            <p class="text-xs">Click the bookmark icon (☆) on any query, Upanishad, Purana, or story to save it for study.</p>
+          </div>
+        `;
+        return;
+      }
+
+      savedBookmarks.forEach(b => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-amber-500/40 transition flex justify-between items-start gap-4";
+        card.innerHTML = `
+          <div>
+            <span class="text-[10px] font-bold text-amber-400 uppercase tracking-wider">${b.type}</span>
+            <h4 class="text-base font-bold text-amber-100 mt-1">${b.title}</h4>
+            <p class="text-xs text-slate-400 mt-1">${b.snippet}</p>
+          </div>
+          <button onclick="toggleBookmark('${b.id}', '${b.type}', '', '')" class="text-red-400 hover:text-red-300 text-xs font-semibold p-1">Remove</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function clearAllBookmarks() {
+      savedBookmarks = [];
+      saveBookmarks();
+      renderBookmarksTab();
+    }
+
+    // --- 8. WEB AUDIO API SYNTHESIZER: MEDITATIVE OM DRONE ---
+    function toggleOmDrone() {
+      if (isDronePlaying) {
+        stopOmDrone();
+      } else {
+        startOmDrone();
+      }
+    }
+
+    function startOmDrone() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+
+        // Fundamental Root Drone (Cosmic C# / 136.1 Hz Om Frequency)
+        droneOsc1 = audioCtx.createOscillator();
+        droneOsc1.type = 'sine';
+        droneOsc1.frequency.setValueAtTime(136.1, audioCtx.currentTime);
+
+        // Fifth Harmonic overtone (204.15 Hz)
+        droneOsc2 = audioCtx.createOscillator();
+        droneOsc2.type = 'triangle';
+        droneOsc2.frequency.setValueAtTime(204.15, audioCtx.currentTime);
+
+        droneGain = audioCtx.createGain();
+        droneGain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+        // Smooth swell
+        droneGain.gain.exponentialRampToValueAtTime(0.18, audioCtx.currentTime + 3);
+
+        droneOsc1.connect(droneGain);
+        droneOsc2.connect(droneGain);
+        droneGain.connect(audioCtx.destination);
+
+        droneOsc1.start();
+        droneOsc2.start();
+
+        isDronePlaying = true;
+        document.getElementById('audioText').innerText = "Om Drone: Active (Tap to Stop)";
+        document.getElementById('audioToggleBtn').className = "flex items-center space-x-2 px-3 py-1.5 rounded-full bg-amber-500 text-slate-950 text-xs font-bold transition-all shadow-lg shadow-amber-500/20";
+      } catch (err) {
+        console.error("Audio Web API error: ", err);
+      }
+    }
+
+    function stopOmDrone() {
+      if (droneGain && audioCtx) {
+        droneGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
+        setTimeout(() => {
+          if (droneOsc1) droneOsc1.stop();
+          if (droneOsc2) droneOsc2.stop();
+          if (audioCtx) audioCtx.close();
+          isDronePlaying = false;
+          document.getElementById('audioText').innerText = "Meditative Om";
+          document.getElementById('audioToggleBtn').className = "flex items-center space-x-2 px-3 py-1.5 rounded-full bg-amber-950/60 hover:bg-amber-900/60 border border-amber-500/30 text-amber-300 text-xs transition-all";
+        }, 1000);
+      }
+    }
+
+    // --- 9. MODAL HANDLER ---
+    function openModal(title, category, contentHtml, id) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalCategory').innerText = category;
+      document.getElementById('modalContent').innerHTML = contentHtml;
+      
+      const bookmarkBtn = document.getElementById('modalBookmarkBtn');
+      if (id) {
+        bookmarkBtn.onclick = () => toggleBookmark(id, category, title, '');
+        bookmarkBtn.innerHTML = isBookmarked(id) ? `<span>🔖</span><span>Saved in Bookmarks</span>` : `<span>☆</span><span>Save to Bookmarks</span>`;
+      }
+
+      document.getElementById('detailModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('detailModal').classList.add('hidden');
+    }
+
+    function escapeStr(str) {
+      if (!str) return '';
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    // --- 10. INITIALIZATION ---
+    window.onload = function() {
+      loadBookmarks();
+      renderQueries('all');
+      renderUpanishads();
+      renderPuranas('all');
+      renderStories();
+      renderQuizQuestion();
+    };
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Hello, World!</title>
+</head>
+<body>
+  <h1>
+    Hello, World!
+  </h1>
+</body>
+</html>
